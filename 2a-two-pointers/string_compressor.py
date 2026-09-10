@@ -25,8 +25,8 @@ while r < n:
         count += 1
     r += 1
 chars[w] = chars[r - 1]
+w += 1
 if count >= 2:
-    w += 1
     for num in str(count):
         chars[w] = num
         w += 1
