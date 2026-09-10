@@ -1,0 +1,2 @@
+s = "ADOBECODEBANC"
+t = "ABC"
