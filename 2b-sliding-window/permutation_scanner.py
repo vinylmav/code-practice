@@ -1,0 +1,2 @@
+pattern = "ab"
+text = "eidbaooo"
