@@ -12,8 +12,8 @@
 # A: that score will be added to the sum
 #    - Answer: when/how do I update the answer?
 # when i find a score greater than the saved maximum.
-scores = [1, 1, 1, 1, 1]
-k = 5
+scores = [5, 4, 3, 2, 1]
+k = 3
 n = len(scores)
 # calculate the first window
 max_score = 0
