@@ -1,49 +1,49 @@
-pattern = "ab"
-text = "eidbaooo"
-n = len(text)
-found = False
-seen = 0
-k = len(pattern)
-pattern_vault = {}
-text_vault = {}
-for ch in pattern:
-    pattern_vault[ch] = pattern_vault.get(ch, 0) + 1
-# for r in range(n):
-#     ch = text[r]
-#     if ch in pattern_vault:
-#         text_vault[ch] = text_vault.get(ch, 0) + 1
-#         if text_vault[ch] <= pattern_vault[ch]:
-#             seen += 1
-#         if seen == k:
-#             found = True
-#             break
-#     else:
-#         seen = 0
-# print(found)
-# this solution works, but razor is not satisfied.
-# use fixed window
-for i in range(k):
-    ch = text[i]
-    if ch in pattern_vault:
-        text_vault[ch] = text_vault.get(ch, 0) + 1
-        if text_vault[ch] <= pattern_vault[ch]:
-                seen += 1
-l = 0
-for r in range(k, n):
-    if seen != k:
-        l_ch, r_ch = text[l], text[r]
-        if l_ch in pattern_vault:
-            if text_vault[l_ch] <= pattern_vault[l_ch]:
-                seen -= 1
-            text_vault[l_ch] = text_vault.get(l_ch, 0) - 1
-        if r_ch in pattern_vault:
-            text_vault[r_ch] = text_vault.get(r_ch, 0) + 1
-            if text_vault[r_ch] <= pattern_vault[r_ch]:
-                seen += 1
+# 1. VALIDITY:  What condition makes window [l, r] valid?
+# A: if it contains all the ch in pattern string
+# 2. TYPE:      Fixed-size or variable-size? (Is window size given/derivable,
+# or am I optimizing it?)
+# A: fixed
+# 3. TEMPLATE:
+#    - What state do I track? (sum? freq map? count? max_freq?)
+# A: freq map
+#    - Expand: what changes when r moves right?
+# A: add the new ch to the map and change seen
+#    - Contract: what changes when l moves right?
+# A: sub the ch from the map and change seen
+#    - Answer: when/how do I update the answer?
+# A: if valid window is found break
+pattern = "abc"
+text = "aabcidbaooo"
+def permutation_scanner(pattern, text):
+    n = len(text)
+    pattern_map = {}
+    need = len(pattern)
+    for i in range(need):
+        ch = pattern[i]
+        pattern_map[ch] = pattern_map.get(ch, 0) + 1
+    text_map = {}
+    l = 0
+    seen = 0
+    for r in range(need):
+        ch = text[r]
+        text_map[ch] = text_map.get(ch, 0) + 1
+        if ch in pattern_map and text_map[ch] <= pattern_map[ch]:
+            seen += 1
+    if seen == need:
+        return True
+    k = need
+    for r in range(k, n):
+        l_ch = text[l]
+        if l_ch in pattern_map and text_map[l_ch] <= pattern_map[l_ch]:
+            seen -= 1
+        text_map[l_ch] = text_map.get(l_ch, 0) - 1
+        r_ch = text[r]
+        text_map[r_ch] = text_map.get(r_ch, 0) + 1
+        if r_ch in pattern_map and text_map[r_ch] <= pattern_map[r_ch]:
+            seen += 1
+        if seen == need:
+            return True
         l += 1
-    else:
-        found = True
-        break
-if seen == k:
-    found = True
-print(found)
+    return False
+
+print(permutation_scanner(pattern, text))
