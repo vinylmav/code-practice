@@ -1,5 +1,5 @@
-s = "DEFBAA"
-t = "A"
+s = "DECFBAA"
+t = "ABC"
 n = len(s)
 # 1. VALIDITY:  What condition makes window [l, r] valid?
 # A: it should contain all the vitamins
