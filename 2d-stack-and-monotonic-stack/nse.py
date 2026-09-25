@@ -34,3 +34,28 @@ for i in range(1, len(nums)):
     else:
         ans[i] = nums[stack[-1]]
 print("PGE", ans)
+
+# PSE
+nums = [1, 2, 3, 4, 5]
+stack = [0]
+n = len(nums)
+ans = [-1] * n
+for i in range(1, n):
+    while stack and nums[stack[-1]] >= nums[i]:
+        stack.pop()
+    if stack:
+        ans[i] = nums[stack[-1]]
+    stack.append(i)
+print(ans)
+
+nums = [5, 5, 4, 1]
+stack = [0]
+n = len(nums)
+ans = [-1] * n
+for i in range(n):
+    while stack and nums[stack[-1]] <= nums[i]:
+        stack.pop()
+    if stack:
+        ans[i] = nums[stack[-1]]
+    stack.append(i)
+print(ans)
