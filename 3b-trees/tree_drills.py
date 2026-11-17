@@ -1,3 +1,5 @@
+import math
+
 from tree_node import TreeNode, tree_a, tree_f, tree_b, tree_c, tree_d, tree_h, tree_i
 
 # Drill 1: Build a tree by hand and walk it
@@ -30,7 +32,7 @@ def height(node):
 # Drill 5: Max value in tree
 def max_value(node):
     if node is None:
-        return 0
+        return -math.inf
     return max(node.value, max_value(node.left), max_value(node.right))
 
 # Drill 6: Are two trees identical?
