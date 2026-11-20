@@ -16,6 +16,7 @@ class TreeNode:
 #     2   3
 #    / \   \
 #   4   5   6
+
 def tree_a():
     return TreeNode(1,
         TreeNode(2, TreeNode(4), TreeNode(5)),
@@ -30,13 +31,13 @@ def tree_c():
     return None
 
 # Tree D — Left-Skewed
-#   1
-#  /
-# 2
-#  /
-#   3
+#         1 
+#        /
+#       2
+#      /
+#     3
 #    /
-#     4
+#   4
 def tree_d():
     return TreeNode(1, TreeNode(2, TreeNode(3, TreeNode(4))))
 
