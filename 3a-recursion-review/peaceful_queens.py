@@ -4,7 +4,7 @@ col = {}
 diagonal = {}
 
 def generate_n_chess_grid(n):
-    return [['.'] * 4 for _ in range(4)]
+    return [['.'] * n for _ in range(n)]
 
 def add(coordinate, grid):
     diagonal[coordinate] = True

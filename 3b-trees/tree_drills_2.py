@@ -16,19 +16,21 @@ def path_sum(node, target):
 # you didn't subtract the leaf node's value before checking. that's the error.
 
 # Drill 10: All Root-to-Leaf Paths
-def all_paths(node, path=[], results=[]):
-    if node is None:
-        return
-    if node.left is None and node.right is None:
-        path.append(f"{node.value}")
-        results.append(''.join(path))
+def all_paths(node):
+    def helper(node, path, results):
+        if node is None:
+            return
+        if node.left is None and node.right is None:
+            path.append(f"{node.value}")
+            results.append(''.join(path))
+            path.pop()
+            return results
+        path.append(f"{node.value}->")
+        helper(node.left, path, results)
+        helper(node.right, path, results)
         path.pop()
         return results
-    path.append(f"{node.value}->")
-    all_paths(node.left, path, results)
-    all_paths(node.right, path, results)
-    path.pop()
-    return results
+    return helper(node, [], [])
 
 def find_depth(node, target, depth):
     if node is None:
@@ -52,17 +54,17 @@ def pre_order(node, order):
 def post_order(node, order):
     if node is None:
         return
-    pre_order(node.left, order)
-    pre_order(node.right, order)
+    post_order(node.left, order)
+    post_order(node.right, order)
     order.append(node.value)
     return order
 
 def in_order(node, order):
     if node is None:
         return
-    pre_order(node.left, order)
+    in_order(node.left, order)
     order.append(node.value)
-    pre_order(node.right, order)
+    in_order(node.right, order)
     return order
 
 # Drill 15: Level-order flat
@@ -115,4 +117,14 @@ def is_balanced(node):
     if diff > 1:
         return -1
     return 1 + max(left_height, right_height)
+
+ans = is_balanced(tree_d())
+
+# Drill 18: Diameter
+def diameter(node):
+    if node is None:
+        return [0, 0]
+    lh, ld = diameter(node.left)
+    rh, rd = diameter(node.right)
+    return [1 + max(lh, rh), max(ld, rd, lh + rh)]
 

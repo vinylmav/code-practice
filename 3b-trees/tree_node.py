@@ -31,7 +31,7 @@ def tree_c():
     return None
 
 # Tree D — Left-Skewed
-#         1 
+#         1
 #        /
 #       2
 #      /
@@ -67,6 +67,7 @@ def tree_f():
 #       4   12
 #      / \  / \
 #     2  6 10  14
+
 def tree_g():
     return TreeNode(8,
         TreeNode(4, TreeNode(2), TreeNode(6)),
